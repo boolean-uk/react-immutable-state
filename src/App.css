@@ -1,9 +1,21 @@
 body {
-  padding:10px;
+  padding: 10px;
 }
 
 li {
   display: grid;
-  grid-template-columns: 400px 70px 70px;
-  gap:10px;
+  grid-template-columns: 400px 70px 70px 70px;
+  gap: 10px;
+}
+
+.checkbox {
+  display: inline-block;
+  cursor: pointer;
+}
+.checked {
+  background-color: green;
+  color: aliceblue;
+}
+input[type="checkbox"] {
+  display: none;
 }
