@@ -4,7 +4,7 @@ export const initialWorkouts = [
     reps: 10,
     sets: 4,
     rest: 5,
-    done: false
+    done: true
   },
   {
     exercise: "Push Ups",
