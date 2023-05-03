@@ -7,16 +7,23 @@ function App() {
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
-    console.log("addNewWorkout:", newWorkout)
+    const newWorkoutList = workouts.map(item => item)
+    newWorkoutList.push(newWorkout)
+    setWorkouts(newWorkoutList)
   }
 
   const deleteWorkout = (workout) => {
+    const newWorkoutList = workouts.filter(item => item !== workout)
+    setWorkouts(newWorkoutList)
+    console.log(newWorkoutList)
     console.log("deleteWorkout:", workout)
   }
 
   const completeWorkout = (workout) => {
     console.log("completeWorkout:", workout)
   }
+
+  // Implement the addNewWorkout function to add the newWorkout object to the workouts state in an immutable way.
 
   return (
     <div className="App">
@@ -36,7 +43,6 @@ function App() {
           </li>
         ))}
       </ul>
-      
     </div>
   )
 }
