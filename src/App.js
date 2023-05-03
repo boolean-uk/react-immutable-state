@@ -21,6 +21,18 @@ function App() {
 
   const completeWorkout = (workout) => {
     console.log("completeWorkout:", workout)
+    const newWorkoutList = workouts.map(item => {
+      if (item === workout) {
+        return {
+          ...item, done: true
+        }
+      } else {
+        return item
+      } 
+    })
+
+    setWorkouts(newWorkoutList)
+
   }
 
   // Implement the addNewWorkout function to add the newWorkout object to the workouts state in an immutable way.
