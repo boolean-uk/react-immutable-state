@@ -26,6 +26,17 @@ function App() {
 
   const completeWorkout = (workout) => {
     console.log("completeWorkout:", workout);
+    const doneWorkout = workouts.map((item) => {
+      if (item === workout) {
+        return {
+          ...item,
+          done: true,
+        };
+      } else {
+        return item;
+      }
+    });
+    setWorkouts(doneWorkout);
   };
 
   return (
