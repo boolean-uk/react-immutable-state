@@ -7,16 +7,36 @@ function App() {
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
-    console.log("addNewWorkout:", newWorkout)
+        console.log("addNewWorkout:", newWorkout)
+        setWorkouts([...workouts, newWorkout])
   }
 
   const deleteWorkout = (workout) => {
+    const newWorkout = workouts.filter(item => {
+      if(item !== workout){
+        return workout
+      }
+    })
+    setWorkouts(newWorkout)
     console.log("deleteWorkout:", workout)
   }
-
-  const completeWorkout = (workout) => {
+  
+ 
+    
+    const completeWorkout = (workout) => {
+    const finishedWorkout = workouts.map(item =>{
+      if(item === workout){
+        return {...workout, done: true
+      }
+    }else {
+      return item
+    }
+    })
     console.log("completeWorkout:", workout)
+    setWorkouts(finishedWorkout)
+      
   }
+  
 
   return (
     <div className="App">
@@ -39,6 +59,5 @@ function App() {
       
     </div>
   )
-}
-
+ }
 export default App
