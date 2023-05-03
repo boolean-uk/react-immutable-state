@@ -27,6 +27,19 @@ function App() {
 
   const completeWorkout = (workout) => {
     console.log("completeWorkout:", workout)
+    console.log('workout.done', workout.done)
+    const completed = workouts.map(el => {
+      if (el === workout) {
+        return {
+          ...el,
+          exercise: 'completed it mate',
+          done: true
+        }
+      } else {
+        return el
+      }
+    })
+    setWorkouts(completed)
   }
 
   return (
