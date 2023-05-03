@@ -8,15 +8,41 @@ function App() {
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
     console.log("addNewWorkout:", newWorkout)
+
+    setWorkouts([...workouts, newWorkout])
+    console.log(workouts)
   }
 
   const deleteWorkout = (workout) => {
     console.log("deleteWorkout:", workout)
+
+    const filteredWorkout = workouts.filter(item => {
+
+      if (item !== workout) {
+        return workout
+      }
+    })
+    setWorkouts(filteredWorkout)
   }
 
   const completeWorkout = (workout) => {
-    console.log("completeWorkout:", workout)
+    // console.log("completeWorkout:", workout)
+    const updateWorkout = workouts.map(item => {
+      if (item === workout) {
+        return {
+          ...item,
+          done: true
+        }
+        } else {
+            return item
+      }
+      
+
+    })
+    setWorkouts(updateWorkout)
   }
+
+  console.log(workouts)
 
   return (
     <div className="App">
