@@ -2,6 +2,8 @@ import { useState } from "react";
 import { initialWorkouts, generateWorkout } from "./Workouts.js";
 import "./App.css";
 
+import { Workout } from "./components";
+
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts);
 
@@ -28,7 +30,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>🏋️‍♀️Workout Generator</h1>
+      <Workout
+        setWorkouts={setWorkouts}
+        addNewWorkout={addNewWorkout}
+        workouts={workouts}
+        completeWorkout={completeWorkout}
+        deleteWorkout={deleteWorkout}
+      />
+      {/* <h1>🏋️‍♀️Workout Generator</h1>
       <button onClick={addNewWorkout}>Add New Workout</button>
       <ul>
         {workouts.map((workout, index) => (
@@ -47,7 +56,7 @@ function App() {
             <button onClick={(e) => deleteWorkout(workout)}>Delete</button>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
