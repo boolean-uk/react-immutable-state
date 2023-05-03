@@ -4,6 +4,7 @@ import "./App.css"
 
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts)
+  const [savedWorkouts, setSavedWorkouts] = useState([])
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
@@ -30,17 +31,38 @@ function App() {
         return item
       } 
     })
-
     setWorkouts(newWorkoutList)
-
   }
 
-  // Implement the addNewWorkout function to add the newWorkout object to the workouts state in an immutable way.
+  const toggleDoneView = (event) => {
+    console.log(event.target.checked)
+    if (event.target.checked) {
+      setSavedWorkouts(workouts)
+      const newWorkoutList = workouts.filter(item => item.done === event.target.checked)
+      setWorkouts(newWorkoutList)
+    } else {
+      setWorkouts(savedWorkouts)
+    }  
+  }
+
+  const randomWorkout = (workout) => {
+    const newWorkoutList = workouts.map(item => {
+      if (item === workout) {
+        let newWorkout = generateWorkout()
+        return newWorkout
+      } else {
+        return item
+      }
+    })
+    setWorkouts(newWorkoutList)
+  }
 
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
       <button onClick={addNewWorkout}>Add New Workout</button>
+      <label name='showDone'>Show Only Done</label>
+      <input name='showDone' type='checkbox' onChange={toggleDoneView}/>
       <ul>
         {workouts.map((workout, index) => (
           <li key={index}>
@@ -52,6 +74,7 @@ function App() {
             {workout.done && 
              <p>✅</p>}
             <button onClick={e=>deleteWorkout(workout)}>Delete</button>
+            <button onClick={e=>randomWorkout(workout)}>Randomize</button>
           </li>
         ))}
       </ul>
