@@ -13,12 +13,11 @@ function App() {
 
   const deleteWorkout = (workout) => {
     const newState = workouts.filter((el) => {
-      el !== workout ? workout : false
-      // if (el !== workout) {
-      //   return workout
-      // } else {
-      //   return false
-      // }
+      if (el !== workout) {
+        return workout
+      } else {
+        return false
+      }
     })
 
     setWorkouts(newState)
