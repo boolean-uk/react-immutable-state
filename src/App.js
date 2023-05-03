@@ -16,7 +16,7 @@ function App() {
       if (el !== workout) {
         return workout
       } else {
-        return false
+        return null
       }
     })
 
