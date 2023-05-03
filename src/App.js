@@ -46,6 +46,19 @@ function App() {
     setHideUnfinished(newState)
   }
 
+  const mulligan = (workout) => {
+    const replacementWorkout = generateWorkout()
+
+    const updated = workouts.map((el) => {
+      if (el === workout) {
+        return replacementWorkout
+      }
+      return el
+    })
+
+    setWorkouts(updated)
+  }
+
     return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
@@ -57,8 +70,8 @@ function App() {
       <ul>
 
         {workouts.map((workout, index) => (
-
           <li key={index} style={hideUnfinished ? (workout.done ? {} : {display:'none'}) : {}}>
+            {console.log(workouts)}
             <p>
               {workout.sets}x sets of <strong>{workout.reps}x{workout.exercise}</strong> with {workout.rest} seconds rest
             </p>
@@ -67,6 +80,7 @@ function App() {
             {workout.done && 
              <p>✅</p>}
             <button onClick={e=>deleteWorkout(workout)}>Delete</button>
+            <button onClick={e=>mulligan(workout)}>Mulligan</button>
           </li>
         ))}
       </ul>
