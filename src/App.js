@@ -10,6 +10,8 @@ function App() {
     const newWorkout = generateWorkout()
     console.log("addNewWorkout:", newWorkout)
     setWorkouts([...workouts,newWorkout])
+
+    // wouldnt be initial cuz i want the new workout along with the other workouts otherwise id get it next to initial all time
   }
 
   const deleteWorkout = (workout) => {
@@ -25,22 +27,31 @@ function App() {
 
   }
 
+  // const completeWorkout = (workout) => {
+  //   console.log("completeWorkout:", workout)
+
+  //   const workoutToUpdate = workouts.map((item) => {
+  //     if (item === workout) {
+  //       return {
+  //         ...item,
+  //         done: true
+  //       }}
+  //       else {
+  //         return item
+  //       }
+  //     });
+  //     setWorkouts(workoutToUpdate)
+  //     }
+    
   const completeWorkout = (workout) => {
     console.log("completeWorkout:", workout)
+    const updatedWorkouts = workouts.map(item => item === workout ? { ...item, done: !item.done } : item
+    )
+    setWorkouts(updatedWorkouts)
 
-    const workoutToUpdate = workouts.map((item) => {
-      if (item === workout) {
-        return {
-          ...item,
-          done: true
-        }}
-        else {
-          return item
-        }
-      });
-      setWorkouts(workoutToUpdate)
-      }
-    
+  }
+
+
   
 
   return (
