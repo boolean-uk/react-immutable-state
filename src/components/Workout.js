@@ -1,13 +1,19 @@
 function Workout(props) {
-  const handleChange = (ev) => {
-    props.completeWorkout( ev.target.checked);
-    console.log("propsss", ev.target.checked);
-  };
+  // const handleChange = (ev) => {
+  //   props.completeWorkout(ev.target.checked);
+  //   console.log("propsss", ev.target.checked);
+  // };
 
   return (
     <>
       <h1>🏋️‍♀️Workout Generator</h1>
       <button onClick={props.addNewWorkout}>Add New Workout</button>
+
+      <form>
+        <br />
+        <label>Show Only done</label>
+        <input type="checkbox" onChange={() => props.toggleView()}></input>
+      </form>
       <ul>
         {props.workouts.map((workout, index) => (
           <li key={index}>
@@ -23,17 +29,14 @@ function Workout(props) {
                 Done
               </button>
             )}
-            {workout.done && <p>✅</p>}
+            {workout.done && <p>✅</p>}{" "}
+            {/* if statement if work.done === true display <p>*/}
             <button onClick={(e) => props.deleteWorkout(workout)}>
               Delete
             </button>
           </li>
         ))}
       </ul>
-      <form>
-        <label>Show Only done</label>
-        <input type="checkbox" onChange={handleChange}></input>
-      </form>
     </>
   );
 }

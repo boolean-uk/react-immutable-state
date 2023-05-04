@@ -6,6 +6,7 @@ import { Workout } from "./components";
 
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts);
+  const [toggWork, setToggWork] = useState([]);
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout();
@@ -39,6 +40,17 @@ function App() {
     setWorkouts(doneWorkout);
   };
 
+  const toggleView = (e) => {
+    if (e) {
+      setToggWork(workouts);
+      const newWorkoutList = workouts.filter((item) => item.done === e);
+      console.log("log", e);
+      setWorkouts(newWorkoutList);
+    } else {
+      setWorkouts(toggWork);
+    }
+  };
+
   return (
     <div className="App">
       <Workout
@@ -47,7 +59,7 @@ function App() {
         workouts={workouts}
         completeWorkout={completeWorkout}
         deleteWorkout={deleteWorkout}
-       
+        toggleView={toggleView}
       />
     </div>
   );
