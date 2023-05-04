@@ -6,14 +6,13 @@ import { Workout } from "./components";
 
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts);
-  const [toggWork, setToggWork] = useState([]);
+  const [showOnlyDone, setShowOnlyDone] = useState(false);
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout();
     console.log("addNewWorkout:", newWorkout);
 
     setWorkouts([...workouts, newWorkout]);
-    setToggWork([...workouts, newWorkout]);
   };
 
   const deleteWorkout = (workout) => {
@@ -42,19 +41,7 @@ function App() {
   };
 
   const toggleView = (e) => {
-    const checked = e.target.checked;
-    console.log("check", checked);
-    if (checked === true) {
-      const newWorkoutList = workouts.filter((item) => {
-        if (item.done === true) {
-          return item;
-        }
-      });
-      setWorkouts(newWorkoutList);
-    }
-    if (checked === false) {
-      return setWorkouts(toggWork);
-    }
+    setShowOnlyDone(!showOnlyDone);
   };
 
   return (
@@ -62,7 +49,9 @@ function App() {
       <Workout
         setWorkouts={setWorkouts}
         addNewWorkout={addNewWorkout}
-        workouts={workouts}
+        workouts={
+          showOnlyDone ? workouts.filter((item) => item.done) : workouts
+        }
         completeWorkout={completeWorkout}
         deleteWorkout={deleteWorkout}
         toggleView={toggleView}
