@@ -1,19 +1,12 @@
 function Workout(props) {
-  // const handleChange = (ev) => {
-  //   props.completeWorkout(ev.target.checked);
-  //   console.log("propsss", ev.target.checked);
-  // };
-
   return (
     <>
       <h1>🏋️‍♀️Workout Generator</h1>
       <button onClick={props.addNewWorkout}>Add New Workout</button>
+      <br />
+      <label>Show Only done</label>
+      <input type="checkbox" onChange={props.toggleView}></input>
 
-      <form>
-        <br />
-        <label>Show Only done</label>
-        <input type="checkbox" onChange={() => props.toggleView()}></input>
-      </form>
       <ul>
         {props.workouts.map((workout, index) => (
           <li key={index}>

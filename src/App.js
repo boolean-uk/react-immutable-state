@@ -13,6 +13,7 @@ function App() {
     console.log("addNewWorkout:", newWorkout);
 
     setWorkouts([...workouts, newWorkout]);
+    setToggWork([...workouts, newWorkout]);
   };
 
   const deleteWorkout = (workout) => {
@@ -41,13 +42,18 @@ function App() {
   };
 
   const toggleView = (e) => {
-    if (e) {
-      setToggWork(workouts);
-      const newWorkoutList = workouts.filter((item) => item.done === e);
-      console.log("log", e);
+    const checked = e.target.checked;
+    console.log("check", checked);
+    if (checked === true) {
+      const newWorkoutList = workouts.filter((item) => {
+        if (item.done === true) {
+          return item;
+        }
+      });
       setWorkouts(newWorkoutList);
-    } else {
-      setWorkouts(toggWork);
+    }
+    if (checked === false) {
+      return setWorkouts(toggWork);
     }
   };
 
