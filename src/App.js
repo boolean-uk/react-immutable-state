@@ -7,17 +7,25 @@ function App() {
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
+    setWorkouts([...workouts, newWorkout])
+
     console.log("addNewWorkout:", newWorkout)
   }
 
   const deleteWorkout = (workout) => {
+    const newWorkouts = workouts.filter(obj => {
+      if (obj !== workout) {
+        return workout
+      }
+    })
+    setWorkouts(newWorkouts)
     console.log("deleteWorkout:", workout)
   }
 
   const completeWorkout = (workout) => {
     console.log("completeWorkout:", workout)
   }
-
+  
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
