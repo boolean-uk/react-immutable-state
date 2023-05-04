@@ -4,17 +4,18 @@ import "./App.css";
 
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout();
     // Part 1 Adding Workouts
-    console.log("addNewWorkout:", newWorkout);
+    // console.log("addNewWorkout:", newWorkout);
     setWorkouts([...workouts, newWorkout]);
   };
 
   const deleteWorkout = (workout) => {
     // Part 2 Removing Workouts
-    console.log("deleteWorkout:", workout);
+    // console.log("deleteWorkout:", workout);
     const newWorkouts = workouts.filter((workoutItem) => {
       if (workoutItem !== workout) {
         return workoutItem;
@@ -25,7 +26,7 @@ function App() {
 
   const completeWorkout = (workout) => {
     // Part 3 Updating Workouts
-    console.log("completeWorkout:", workout);
+    // console.log("completeWorkout:", workout);
     const updatedWorkouts = workouts.map((item) => {
       if (item === workout) {
         return {
@@ -39,12 +40,30 @@ function App() {
     setWorkouts(updatedWorkouts);
   };
 
+  const completedWorkout = workouts.filter((item) => {
+    if (item.done === true) {
+      return item;
+    }
+  });
+
+  const filteredWorkout = showCompleted ? completedWorkout : workouts;
+
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
       <button onClick={addNewWorkout}>Add New Workout</button>
+      <div>
+        <label>
+          Show Done Only
+          <input
+            type="checkbox"
+            checked={showCompleted}
+            onChange={() => setShowCompleted(!showCompleted)}
+          />
+        </label>
+      </div>
       <ul>
-        {workouts.map((workout, index) => (
+        {filteredWorkout.map((workout, index) => (
           <li key={index}>
             <p>
               {workout.sets}x sets of{" "}
