@@ -2,6 +2,10 @@ import { useState } from "react"
 import {initialWorkouts, generateWorkout} from "./Workouts.js"
 import "./App.css"
 
+//need to import from Components/index.js
+import { NewWorkout, } from './Components'
+
+
 function App() {
 
   const initialHideUnfinished = false
@@ -9,11 +13,7 @@ function App() {
 
   const [workouts, setWorkouts] = useState(initialWorkouts)
 
-  const addNewWorkout = () => {
-    const newWorkout = generateWorkout()
-    setWorkouts([...workouts, newWorkout])
-    console.log("addNewWorkout:", newWorkout)
-  }
+
 
   const deleteWorkout = (workout) => {
     const newState = workouts.filter((el) => {
@@ -62,7 +62,7 @@ function App() {
     return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
-      <button onClick={addNewWorkout}>Add New Workout</button>
+      <NewWorkout generateWorkout={generateWorkout} setWorkouts={setWorkouts} workouts={workouts}/>
       <form onChange={toggleDone}>
         <label>Only show finished workouts</label>
         <input type='checkbox'></input>
