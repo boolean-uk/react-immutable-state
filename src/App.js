@@ -59,10 +59,6 @@ function App() {
     if (event.target.checked === true){
       setWorkouts(doneWorkouts)
       
-      console.log(notDone)
-      
-
-      
       
     }
     stateHistory.push(restoreState())
@@ -88,7 +84,14 @@ function App() {
     } 
     
   }
-  console.log(stateHistory, workouts, deleteHistory)
+
+  const newWorkout = (workout) => {
+    const exchangeWorkout = generateWorkout()
+    workouts.splice(workouts.indexOf(workout), 1, exchangeWorkout)
+    deleteWorkout(workout)
+    
+  }
+  console.log(workouts)
   
 
   return (
@@ -121,6 +124,9 @@ function App() {
 
             {/* Add a new button to each workout that when clicked replaces the workout with another random workout */}
 
+            <button onClick = {() => newWorkout(workout)}>
+              New
+            </button>
 
 
           </li>
