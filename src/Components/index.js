@@ -1,6 +1,7 @@
 //this is where all the components in the Components folder will be exported to App.js
 
 // choose complete
+import CompleteWorkout from './CompleteWorkout'
 
 //delete
 
@@ -17,5 +18,6 @@ import NewWorkout from './NewWorkout'
 
 export {
   NewWorkout,
-  Mulligan
+  Mulligan,
+  CompleteWorkout
 }

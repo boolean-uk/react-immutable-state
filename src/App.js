@@ -3,9 +3,7 @@ import {initialWorkouts, generateWorkout} from "./Workouts.js"
 import "./App.css"
 
 //need to import from Components/index.js
-import { NewWorkout } from './Components'
-import {Mulligan } from './Components'
-
+import { NewWorkout, Mulligan, CompleteWorkout } from './Components'
 
 function App() {
 
@@ -30,18 +28,6 @@ function App() {
     console.log("deleteWorkout:", workout)
   }
 
-  const completeWorkout = (workout) => {
-    console.log("completeWorkout:", workout)
-    console.log('workout.done', workout.done)
-    const completed = workouts.map(el => {
-      if (el === workout) {
-        el.done = true
-      } 
-      return el
-    })
-    setWorkouts(completed)
-  }
-
   const toggleDone = (event) => {
     const newState = event.target.checked
     setHideUnfinished(newState)
@@ -63,12 +49,9 @@ function App() {
             <p>
               {workout.sets}x sets of <strong>{workout.reps}x{workout.exercise}</strong> with {workout.rest} seconds rest
             </p>
-            {!workout.done && 
-              <button onClick={e=>completeWorkout(workout)}>Done</button>}
-            {workout.done && 
-             <p>✅</p>}
+            <CompleteWorkout workouts={workouts} workout={workout} setWorkouts={setWorkouts} />
             <button onClick={e=>deleteWorkout(workout)}>Delete</button>
-            <Mulligan generateWorkout={generateWorkout} setWorkouts={setWorkouts} workout={workout} workouts={workouts} generateWorkout={generateWorkout}/>
+            <Mulligan generateWorkout={generateWorkout} setWorkouts={setWorkouts} workout={workout} workouts={workouts} />
           </li>
         ))}
       </ul>
