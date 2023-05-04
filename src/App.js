@@ -4,20 +4,24 @@ import "./App.css"
 
 
 let stateHistory = []
+let deleteHistory = []
+
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts)
-
+  
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
     // console.log("addNewWorkout:", newWorkout)
     setWorkouts([...workouts, newWorkout])
     
   }
-
+ 
   const deleteWorkout = (workout) => {
     // console.log("deleteWorkout:", workout)
+    deleteHistory.push(workout)
     const newWorkouts = workouts.filter(item => {
       if (item !== workout) {
+        // console.log(item)
         return workout
       }
     })
@@ -25,7 +29,7 @@ function App() {
     
 
   }
-
+  
   const completeWorkout = (workout) => {
     
     const newWorkouts = workouts.map(item => {
@@ -45,25 +49,47 @@ function App() {
 
   
 
-
   const changeListener = (event) => {
 
     const restoreState = () => workouts.map(object => object)
     const doneWorkouts = workouts.filter(object => object.done === true)
-    
+    const notDone = workouts.filter(object => object.done === false)
+
+
     if (event.target.checked === true){
       setWorkouts(doneWorkouts)
       
+      console.log(notDone)
+      
+
+      
+      
     }
     stateHistory.push(restoreState())
-   
+    
     if (event.target.checked === false) {
-      setWorkouts(stateHistory[(stateHistory.length-1) - 1])
+      
+      
+      
+      
+      let deleteDone = stateHistory[(stateHistory.length-1) - 1].filter(function(item) {
+
+
+        return !deleteHistory.includes(item)
+      })
+
+      if (notDone.length === 0){
+          deleteDone = deleteDone
+      } else {
+
+        deleteDone.push(...notDone)
+      }
+      setWorkouts(deleteDone)
     } 
     
   }
+  console.log(stateHistory, workouts, deleteHistory)
   
-
 
   return (
     <div className="App">
