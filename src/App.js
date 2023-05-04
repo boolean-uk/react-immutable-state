@@ -3,7 +3,8 @@ import {initialWorkouts, generateWorkout} from "./Workouts.js"
 import "./App.css"
 
 //need to import from Components/index.js
-import { NewWorkout, } from './Components'
+import { NewWorkout } from './Components'
+import {Mulligan } from './Components'
 
 
 function App() {
@@ -46,19 +47,6 @@ function App() {
     setHideUnfinished(newState)
   }
 
-  const mulligan = (workout) => {
-    const replacementWorkout = generateWorkout()
-
-    const updated = workouts.map((el) => {
-      if (el === workout) {
-        return replacementWorkout
-      }
-      return el
-    })
-
-    setWorkouts(updated)
-  }
-
     return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
@@ -80,7 +68,7 @@ function App() {
             {workout.done && 
              <p>✅</p>}
             <button onClick={e=>deleteWorkout(workout)}>Delete</button>
-            <button onClick={e=>mulligan(workout)}>Mulligan</button>
+            <Mulligan generateWorkout={generateWorkout} setWorkouts={setWorkouts} workout={workout} workouts={workouts} generateWorkout={generateWorkout}/>
           </li>
         ))}
       </ul>

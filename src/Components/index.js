@@ -5,6 +5,7 @@
 //delete
 
 //mulligan
+import Mulligan from './Mulligan'
 
 //show only complete
 
@@ -15,10 +16,6 @@ import NewWorkout from './NewWorkout'
 
 
 export {
-    NewWorkout
-
-
-
-
-    
+  NewWorkout,
+  Mulligan
 }
