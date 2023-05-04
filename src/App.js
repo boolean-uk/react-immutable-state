@@ -47,6 +47,7 @@ function App() {
         workouts={workouts}
         completeWorkout={completeWorkout}
         deleteWorkout={deleteWorkout}
+       
       />
     </div>
   );

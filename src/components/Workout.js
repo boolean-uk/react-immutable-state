@@ -1,4 +1,9 @@
 function Workout(props) {
+  const handleChange = (ev) => {
+    props.completeWorkout( ev.target.checked);
+    console.log("propsss", ev.target.checked);
+  };
+
   return (
     <>
       <h1>🏋️‍♀️Workout Generator</h1>
@@ -25,6 +30,10 @@ function Workout(props) {
           </li>
         ))}
       </ul>
+      <form>
+        <label>Show Only done</label>
+        <input type="checkbox" onChange={handleChange}></input>
+      </form>
     </>
   );
 }
