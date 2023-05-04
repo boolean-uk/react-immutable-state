@@ -15,9 +15,12 @@ import OnlyDone from './OnlyDone'
 //add new
 import NewWorkout from './NewWorkout'
 
+//render workout list
+import WorkoutList from './WorkoutList'
 
 
 export {
+  WorkoutList,
   NewWorkout,
   Mulligan,
   CompleteWorkout,
