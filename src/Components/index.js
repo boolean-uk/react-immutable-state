@@ -4,20 +4,23 @@
 import CompleteWorkout from './CompleteWorkout'
 
 //delete
+import DeleteWorkout from './DeleteWorkout'
 
 //mulligan
 import Mulligan from './Mulligan'
 
 //show only complete
+import OnlyDone from './OnlyDone'
 
 //add new
 import NewWorkout from './NewWorkout'
 
-//display list
 
 
 export {
   NewWorkout,
   Mulligan,
-  CompleteWorkout
+  CompleteWorkout,
+  DeleteWorkout,
+  OnlyDone
 }

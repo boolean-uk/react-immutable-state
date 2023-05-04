@@ -1,48 +1,20 @@
 import { useState } from "react"
-import {initialWorkouts, generateWorkout} from "./Workouts.js"
+import {initialWorkouts, generateWorkout } from "./Workouts.js"
 import "./App.css"
-
-//need to import from Components/index.js
-import { NewWorkout, Mulligan, CompleteWorkout } from './Components'
+import { NewWorkout, Mulligan, CompleteWorkout, DeleteWorkout, OnlyDone} from './Components'
 
 function App() {
 
   const initialHideUnfinished = false
   const [hideUnfinished, setHideUnfinished] = useState(initialHideUnfinished)
-
   const [workouts, setWorkouts] = useState(initialWorkouts)
 
-
-
-  const deleteWorkout = (workout) => {
-    const newState = workouts.filter((el) => {
-      if (el !== workout) {
-        return workout
-      } else {
-        return null
-      }
-    })
-
-    setWorkouts(newState)
-    
-    console.log("deleteWorkout:", workout)
-  }
-
-  const toggleDone = (event) => {
-    const newState = event.target.checked
-    setHideUnfinished(newState)
-  }
-
-    return (
+  return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
       <NewWorkout generateWorkout={generateWorkout} setWorkouts={setWorkouts} workouts={workouts}/>
-      <form onChange={toggleDone}>
-        <label>Only show finished workouts</label>
-        <input type='checkbox'></input>
-      </form>
+      <OnlyDone setHideUnfinished={setHideUnfinished}/>
       <ul>
-
         {workouts.map((workout, index) => (
           <li key={index} style={hideUnfinished ? (workout.done ? {} : {display:'none'}) : {}}>
             {console.log(workouts)}
@@ -50,7 +22,7 @@ function App() {
               {workout.sets}x sets of <strong>{workout.reps}x{workout.exercise}</strong> with {workout.rest} seconds rest
             </p>
             <CompleteWorkout workouts={workouts} workout={workout} setWorkouts={setWorkouts} />
-            <button onClick={e=>deleteWorkout(workout)}>Delete</button>
+            <DeleteWorkout workout={workout} workouts={workouts} setWorkouts={setWorkouts}/>
             <Mulligan generateWorkout={generateWorkout} setWorkouts={setWorkouts} workout={workout} workouts={workouts} />
           </li>
         ))}
@@ -59,5 +31,4 @@ function App() {
     </div>
   )
 }
-
 export default App
