@@ -1,4 +1,6 @@
-function Workout ({workout, completeWorkout, deleteWorkout, index}) { 
+
+
+function MyNewWorkout ({workout, completeWorkout, deleteWorkout, index, updatedWorkout}) { 
     return (
 
 <li key={index}>
@@ -10,10 +12,11 @@ function Workout ({workout, completeWorkout, deleteWorkout, index}) {
 {workout.done && 
  <p>✅</p>}
 <button onClick={e=>deleteWorkout(workout)}>Delete</button>
+<button onClick={e=>updatedWorkout(workout)}>New</button>
 </li>
 
     )
 
 }
 
-export default Workout
+export default MyNewWorkout
