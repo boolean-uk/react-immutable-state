@@ -1,9 +1,26 @@
+.header {
+  text-align: center;
+}
+
 body {
   padding:10px;
 }
 
 li {
   display: grid;
-  grid-template-columns: 400px 70px 70px;
-  gap:10px;
+  grid-template-columns: 400px 70px 70px 70px;
+  gap:5px;
+  margin-bottom: 15px;
+
+}
+
+.top-buttons {
+  padding: 10px;
+  text-align: center;
+}
+
+.button-selected {
+  background-color: rgb(188, 230, 192);
+  border-radius: 3px;
+  border-style: ridge;
 }
