@@ -1,57 +1,54 @@
-import { useState } from "react";
-import { initialWorkouts, generateWorkout } from "./Workouts.js";
-import "./App.css";
+import { useState } from "react"
+import { initialWorkouts, generateWorkout } from "./Workouts.js"
+import "./App.css"
 
 function App() {
-  const [workouts, setWorkouts] = useState(initialWorkouts);
-  const [showDoneOnly, setShowDoneOnly] = useState(false); // State for the checkbox
+  const [workouts, setWorkouts] = useState(initialWorkouts)
+  const [showDoneOnly, setShowDoneOnly] = useState(false) // checkbox
 
   const addNewWorkout = () => {
-    const newWorkout = generateWorkout();
+    const newWorkout = generateWorkout()
     // part one
     // Create a new array with the existing workouts and the new workout
-    const updatedWorkouts = [...workouts, newWorkout];
-
-    // Update the state with the new array
-    setWorkouts(updatedWorkouts);
-  };
+    const updatedWorkouts = [...workouts, newWorkout]
+    setWorkouts(updatedWorkouts)
+  }
    // part two
   const deleteWorkout = (workoutToDelete) => {
-    // Create a new array that filters out the workout to be deleted
-    const updatedWorkouts = workouts.filter(workout => workout !== workoutToDelete);
+    // crating new array that filters out the workout to be deleted
+    const updatedWorkouts = workouts.filter(workout => workout !== workoutToDelete)
   
-    // Update the state with the new array
-    setWorkouts(updatedWorkouts);
+    // updating new array with the state
+    setWorkouts(updatedWorkouts)
   };
 
   //part three
-
   const completeWorkout = (workoutToComplete) => {
-    // Create a new array with the updated workouts
+    // creating new array
     const updatedWorkouts = workouts.map(workout => {
       if (workout === workoutToComplete) {
-        // Clone the workout object and set 'done' to true
-        return { ...workout, done: true };
+        // cloning the workout item and set 'done' to true
+        return { ...workout, done: true }
       }
-      return workout;
+      return workout
     });
   
-    // Update the state with the new array
-    setWorkouts(updatedWorkouts);
-  };
+    // updating the state with new array
+    setWorkouts(updatedWorkouts)
+  }
 
   //extenstion 1
   const toggleShowDoneOnly = () => {
-    setShowDoneOnly(!showDoneOnly);
-  };
+    setShowDoneOnly(!showDoneOnly)
+  }
 
   //extenstion 2
   const replaceWorkout = (workoutToReplace) => {
-    const newWorkout = generateWorkout(); // Generate a new random workout
+    const newWorkout = generateWorkout()
     const updatedWorkouts = workouts.map((workout) =>
       workout === workoutToReplace ? newWorkout : workout
     );
-    setWorkouts(updatedWorkouts);
+    setWorkouts(updatedWorkouts)
   };
 
   return (
@@ -86,11 +83,11 @@ function App() {
 
               <button onClick={() => deleteWorkout(workout)}>Delete</button>
             </li>
-          );
+          )
         })} 
         </ul>
     </div>
-  );
+  )
       }
 
 
