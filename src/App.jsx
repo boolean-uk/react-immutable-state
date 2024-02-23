@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts);
-  const [workputDone, setWorkoutDone] = useState(false);
+  const [workoutDone, setWorkoutDone] = useState(false);
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout();
@@ -38,6 +38,16 @@ function App() {
     setWorkouts(filteredWorkouts); // Remove the array brackets here
   };
 
+  const replaceWorkout = (workout) => {
+    const updatedWorkouts = workouts.map((w) => {
+      if (w === workout) {
+        return generateWorkout(); // Replace the workout with a new random workout
+      }
+      return w;
+    });
+    setWorkouts(updatedWorkouts);
+  };
+
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
@@ -58,6 +68,7 @@ function App() {
             )}
             {workout.done && <p>✅</p>}
             <button onClick={(e) => deleteWorkout(workout)}>Delete</button>
+            <button onClick={() => replaceWorkout(workout)}>Replace</button>
           </li>
         ))}
       </ul>
