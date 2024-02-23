@@ -11,13 +11,7 @@ function App() {
   };
 
   const deleteWorkout = (workout) => {
-    const newWorkOutArray = [];
-
-    workouts.filter((w) => {
-      if (!(w === workout)) {
-        newWorkOutArray.push(w);
-      }
-    });
+    const newWorkOutArray = workouts.filter((w) => w !== workout);
     setWorkouts(newWorkOutArray);
   };
 
