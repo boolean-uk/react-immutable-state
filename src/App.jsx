@@ -29,6 +29,17 @@ function App() {
 		console.log("completeWorkout:", workout);
 	};
 
+	const replaceWorkout = (workout) => {
+		const newWorkouts = workouts.map((w) => {
+			if (w === workout) {
+				return generateWorkout();
+			}
+			return w;
+		});
+		setWorkouts(newWorkouts);
+		console.log("replaceWorkout:", workout);
+	};
+
 	const toggleShowDoneOnly = () => {
 		setShowDoneOnly(!showDoneOnly);
 	};
@@ -62,6 +73,9 @@ function App() {
 							)}
 							{workout.done && <p>✅</p>}
 							<button onClick={(e) => deleteWorkout(workout)}>Delete</button>
+							<button onClick={(e) => replaceWorkout(workout)}>
+								Generate New Random Workout
+							</button>
 						</li>
 					))}
 			</ul>
