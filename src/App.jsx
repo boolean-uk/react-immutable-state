@@ -43,6 +43,15 @@ function App() {
     }
   }
 
+  const newWorkout = (workout) => {
+    const newWorkoutArr = workouts.map((work) => {
+      if (work === workout) return generateWorkout()
+      return work
+    })
+
+    setWorkouts(newWorkoutArr)
+  }
+  
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
@@ -52,6 +61,7 @@ function App() {
           <label>Show Done Only</label>
         </div>
       <ul>
+        {/* When "Show Done Only" is not checked */}
         {!showDone && workouts.map((workout, index) => (
           <li key={index}>
             <p>
@@ -62,9 +72,11 @@ function App() {
             {workout.done &&
               <p>✅</p>}
             <button onClick={e=>deleteWorkout(workout)}>Delete</button>
+            <button onClick={e=>newWorkout(workout)}>New workout</button>
           </li>
         ))}
 
+        {/* When "Show Done Only" is checked */}
         {showDone && workoutsDone.map((workout, index) => (
           <li key={index}>
             <p>
@@ -75,6 +87,7 @@ function App() {
             {workout.done &&
               <p>✅</p>}
             <button onClick={e=>deleteWorkout(workout)}>Delete</button>
+            <button onClick={e=>newWorkout(workout)}>New workout</button>
           </li>
         ))}
       </ul>
