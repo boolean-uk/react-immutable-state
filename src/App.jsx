@@ -31,10 +31,31 @@ function App() {
     setWorkouts(updatedWorkouts);
   };
 
+  const randomiseWorkout = (workout) => {
+    console.log("oldWorkout:", workout);
+    const updatedWorkout = generateWorkout();
+    const updatedWorkouts = workouts.map(function (workouts) {
+      if (workouts == workout) {
+        console.log("randomiseWorkout:", updatedWorkout);
+        return {
+          ...workouts,
+          exercise: updatedWorkout.exercise,
+          reps: updatedWorkout.reps,
+          sets: updatedWorkout.sets,
+          rest: updatedWorkout.rest,
+        };
+      }
+      return workouts;
+    });
+    setWorkouts(updatedWorkouts);
+  };
+
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
       <button onClick={addNewWorkout}>Add New Workout</button>
+      <input type="checkbox" id="showDone"></input>
+      <label htmlFor="showDone"> Show only done</label>
       <ul>
         {workouts.map((workout, index) => (
           <li key={index}>
@@ -46,10 +67,11 @@ function App() {
               with {workout.rest} seconds rest
             </p>
             {!workout.done && (
-              <button onClick={(e) => completeWorkout(workout)}>Done</button>
+              <button onClick={() => completeWorkout(workout)}>Done</button>
             )}
             {workout.done && <p>✅</p>}
-            <button onClick={(e) => deleteWorkout(workout)}>Delete</button>
+            <button onClick={() => deleteWorkout(workout)}>Delete</button>
+            <button onClick={() => randomiseWorkout(workout)}>Randomise</button>
           </li>
         ))}
       </ul>
