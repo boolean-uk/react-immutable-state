@@ -4,6 +4,8 @@ import "./App.css"
 
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts)
+  const [showDone, setShowingDone] = useState(false)
+  const [workoutsDone, setWorkoutsDone] = useState(initialWorkouts)
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
@@ -27,12 +29,43 @@ function App() {
     console.log("completeWorkout:", workout)
   }
 
+  const ToggleDoneShowing = (event) =>
+  {
+    if (event.target.checked)
+    {
+      const newWorkoutArr = workouts.filter((work) => work.done === event.target.checked)
+      setWorkoutsDone(newWorkoutArr)
+      setShowingDone(true)
+    }
+    else
+    {
+      setShowingDone(false)
+    }
+  }
+
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
       <button onClick={addNewWorkout}>Add New Workout</button>
+      <div>
+          <input type="checkbox" onChange={(event) => ToggleDoneShowing(event)}></input>
+          <label>Show Done Only</label>
+        </div>
       <ul>
-        {workouts.map((workout, index) => (
+        {!showDone && workouts.map((workout, index) => (
+          <li key={index}>
+            <p>
+              {workout.sets}x sets of <strong>{workout.reps}x{workout.exercise}</strong> with {workout.rest} seconds rest
+            </p>
+            {!workout.done &&
+              <button onClick={e=>completeWorkout(workout)}>Done</button>}
+            {workout.done &&
+              <p>✅</p>}
+            <button onClick={e=>deleteWorkout(workout)}>Delete</button>
+          </li>
+        ))}
+
+        {showDone && workoutsDone.map((workout, index) => (
           <li key={index}>
             <p>
               {workout.sets}x sets of <strong>{workout.reps}x{workout.exercise}</strong> with {workout.rest} seconds rest
