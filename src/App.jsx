@@ -7,14 +7,18 @@ function App() {
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
+    setWorkouts([...workouts, newWorkout])
     console.log("addNewWorkout:", newWorkout)
   }
 
   const deleteWorkout = (workout) => {
+    setWorkouts(workouts.filter(w => w !== workout))
     console.log("deleteWorkout:", workout)
   }
 
   const completeWorkout = (workout) => {
+    workout.done = true
+    setWorkouts([...workouts])
     console.log("completeWorkout:", workout)
   }
 
