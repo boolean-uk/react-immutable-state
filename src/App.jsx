@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
 	const [workouts, setWorkouts] = useState(initialWorkouts);
+	const [onlyShowDone, setOnlyShowDone] = useState(false);
 
 	const addNewWorkout = () => {
 		const newWorkout = generateWorkout();
@@ -29,12 +30,40 @@ function App() {
 		setWorkouts([...updatedWorkouts]);
 	};
 
+	const toggleShowDone = () => {
+		setOnlyShowDone(!onlyShowDone);
+	};
+
+	const updateSpecificWorkout = (workout) => {
+		const newWorkout = generateWorkout();
+		const updatedWorkouts = workouts.map((w) => {
+			console.log("W:", w);
+			if (w === workout) {
+				return { ...newWorkout };
+			} else {
+				return w;
+			}
+		});
+
+		setWorkouts([...updatedWorkouts]);
+	};
+
+	let filteredWorkouts = workouts;
+
+	if (onlyShowDone) {
+		filteredWorkouts = workouts.filter((workout) => workout.done === true);
+	}
+
 	return (
 		<div className="App">
 			<h1>🏋️‍♀️Workout Generator</h1>
 			<button onClick={addNewWorkout}>Add New Workout</button>
+			<button onClick={() => toggleShowDone()}>
+				{onlyShowDone ? "Show all exersices" : "Show done exersices"}
+			</button>
+
 			<ul>
-				{workouts.map((workout, index) => (
+				{filteredWorkouts.map((workout, index) => (
 					<li key={index}>
 						<p>
 							{workout.sets}x sets of{" "}
@@ -48,6 +77,9 @@ function App() {
 						)}
 						{workout.done && <p>✅</p>}
 						<button onClick={() => deleteWorkout(workout)}>Delete</button>
+						<button onClick={() => updateSpecificWorkout(workout)}>
+							New workout
+						</button>
 					</li>
 				))}
 			</ul>
