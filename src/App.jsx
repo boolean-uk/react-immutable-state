@@ -7,11 +7,15 @@ function App() {
 
   const addNewWorkout = () => {
     const newWorkout = generateWorkout()
-    console.log("addNewWorkout:", newWorkout)
+    setWorkouts([...workouts, newWorkout])
   }
 
-  const deleteWorkout = (workout) => {
-    console.log("deleteWorkout:", workout)
+  const deleteWorkout = (workoutToDelete) => {
+    console.log("deleteWorkout:", workoutToDelete, workouts)
+    const updatedArray = workouts.filter((workout, index) => {
+      return index !== workouts.findIndex(w => w === workoutToDelete);
+    });
+    setWorkouts(updatedArray)
   }
 
   const completeWorkout = (workout) => {
@@ -36,7 +40,6 @@ function App() {
           </li>
         ))}
       </ul>
-
     </div>
   )
 }
