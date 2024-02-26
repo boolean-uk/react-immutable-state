@@ -26,6 +26,18 @@ function App() {
         setWorkouts([...updatedWorkouts]);
     };
 
+    const regenerateWorkout = (workout) => {
+        console.log("regenerateWorkout:", workout);
+        const updatedWorkouts = [...workouts];
+        updatedWorkouts;
+        for (let i = 0; i < updatedWorkouts.length; i++) {
+            if (updatedWorkouts[i] === workout) {
+                updatedWorkouts[i] = generateWorkout();
+            }
+        }
+        setWorkouts([...updatedWorkouts]);
+    };
+
     const checkboxChange = (event) => {
         console.log(event.target.checked);
         setShowCompleted(event.target.checked);
@@ -64,7 +76,11 @@ function App() {
                                 Done
                             </button>
                         )}
-                        {workout.done && <p>✅</p>}
+                        {workout.done && (
+                            <button onClick={(e) => regenerateWorkout(workout)}>
+                                ✅Regen
+                            </button>
+                        )}
                         <button onClick={(e) => deleteWorkout(workout)}>
                             Delete
                         </button>
