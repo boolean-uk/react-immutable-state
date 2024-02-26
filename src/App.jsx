@@ -26,6 +26,13 @@ function App() {
     setCompleteOnlyCheck(!completeOnlyCheck)
   }
 
+  const replaceWorkout = (workout) => {
+    const newWorkout = generateWorkout()
+    const orgWorkouts = workouts
+    orgWorkouts[workouts.indexOf(workout)] = newWorkout
+    setWorkouts([...orgWorkouts])
+  }
+
   useEffect(() => {
     if (completeOnlyCheck) {
       setFilteredWorkouts(workouts.filter((w) => w.done === completeOnlyCheck))
@@ -49,10 +56,11 @@ function App() {
               {workout.sets}x sets of <strong>{workout.reps}x{workout.exercise}</strong> with {workout.rest} seconds rest
             </p>
             {!workout.done &&
-              <button onClick={() =>completeWorkout(workout)}>Done</button>}
+              <button onClick={() => completeWorkout(workout)}>Done</button>}
             {workout.done &&
               <p>✅</p>}
-            <button onClick={() =>deleteWorkout(workout)}>Delete</button>
+            <button onClick={() => deleteWorkout(workout)}>Delete</button>
+            <button onClick={() => replaceWorkout(workout)}>Regenerate</button>
           </li>
         ))}
       </ul>
