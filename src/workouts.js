@@ -34,6 +34,25 @@ export const generateWorkout = () => {
   }
 }
 
+export const addNewWorkout = (workouts, setWorkouts, generateWorkout) => {
+  const newWorkout = generateWorkout();
+  setWorkouts((prevWorkouts) => [...prevWorkouts, newWorkout]);
+};
+
+export const deleteWorkout = (workouts, setWorkouts, workoutToDelete) => {
+  setWorkouts((prevWorkouts) =>
+    prevWorkouts.filter((workout) => workout !== workoutToDelete)
+  );
+};
+
+export const completeWorkout = (workouts, setWorkouts, workoutToComplete) => {
+  setWorkouts((prevWorkouts) =>
+    prevWorkouts.map((workout) =>
+      workout === workoutToComplete ? { ...workout, done: true } : workout
+    )
+  );
+};
+
 const getRandomItem = (items) => {
   return items[Math.floor(Math.random() * items.length)]
 }
@@ -41,3 +60,17 @@ const getRandomItem = (items) => {
 const getRandomInRange = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
+
+export const replaceWorkout = (
+  workouts,
+  setWorkouts,
+  generateWorkout,
+  workoutToReplace
+) => {
+  const newWorkout = generateWorkout();
+  setWorkouts((prevWorkouts) =>
+    prevWorkouts.map((workout) =>
+      workout === workoutToReplace ? newWorkout : workout
+    )
+  );
+};
