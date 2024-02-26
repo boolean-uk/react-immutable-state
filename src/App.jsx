@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
     const [workouts, setWorkouts] = useState(initialWorkouts);
+    const [showCompleted, setShowCompleted] = useState(false);
 
     const addNewWorkout = () => {
         const newWorkout = generateWorkout();
@@ -22,16 +23,34 @@ function App() {
         updatedWorkouts.forEach((element) => {
             if (element === workout) element.done = true;
         });
-        console.log(updatedWorkouts);
         setWorkouts([...updatedWorkouts]);
     };
+
+    const checkboxChange = (event) => {
+        console.log(event.target.checked);
+        setShowCompleted(event.target.checked);
+    };
+
+    let workoutsToDisplay = [...workouts];
+    if (showCompleted) {
+        workoutsToDisplay = [...workouts.filter((w) => w.done === true)];
+    }
 
     return (
         <div className="App">
             <h1>🏋️‍♀️Workout Generator</h1>
             <button onClick={addNewWorkout}>Add New Workout</button>
+            <label>
+                Show completed
+                <input
+                    type="checkbox"
+                    id="showCompletedCheckbox"
+                    value={showCompleted}
+                    onChange={checkboxChange}
+                />
+            </label>
             <ul>
-                {workouts.map((workout, index) => (
+                {workoutsToDisplay.map((workout, index) => (
                     <li key={index}>
                         <p>
                             {workout.sets}x sets of{" "}
