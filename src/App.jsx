@@ -1,42 +1,45 @@
 import { useState } from "react"
-import {initialWorkouts, generateWorkout} from "./Workouts.js"
+import {initialWorkouts, generateWorkout, addNewWorkout, deleteWorkout,
+  completeWorkout,
+  replaceWorkout,
+  
+  } from "./Workouts.js"
 import "./App.css"
+import WorkoutList from "./WorkoutList.jsx";
 
 function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts)
 
-  const addNewWorkout = () => {
-    const newWorkout = generateWorkout()
-    console.log("addNewWorkout:", newWorkout)
-  }
-
-  const deleteWorkout = (workout) => {
-    console.log("deleteWorkout:", workout)
-  }
-
-  const completeWorkout = (workout) => {
-    console.log("completeWorkout:", workout)
-  }
+  const [showDoneOnly, setShowDoneOnly] = useState(false);
 
   return (
     <div className="App">
       <h1>🏋️‍♀️Workout Generator</h1>
-      <button onClick={addNewWorkout}>Add New Workout</button>
-      <ul>
-        {workouts.map((workout, index) => (
-          <li key={index}>
-            <p>
-              {workout.sets}x sets of <strong>{workout.reps}x{workout.exercise}</strong> with {workout.rest} seconds rest
-            </p>
-            {!workout.done &&
-              <button onClick={e=>completeWorkout(workout)}>Done</button>}
-            {workout.done &&
-              <p>✅</p>}
-            <button onClick={e=>deleteWorkout(workout)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <button onClick={()=>addNewWorkout(workouts, setWorkouts, generateWorkout)}>Add New Workout</button>
 
+      <label>
+        <input
+          type="checkbox"
+          checked={showDoneOnly}
+          onChange={(e) => setShowDoneOnly(e.target.checked)}
+        />
+        Show Done Only
+      </label>
+     
+
+      <WorkoutList
+        workouts={workouts}
+        showDoneOnly={showDoneOnly}
+        completeWorkout={(workout) =>
+          completeWorkout(workouts, setWorkouts, workout)
+        }
+        deleteWorkout={(workout) =>
+          deleteWorkout(workouts, setWorkouts, workout)
+        }
+        replaceWorkout={(workout) =>
+          replaceWorkout(workouts, setWorkouts, generateWorkout, workout)
+        }
+      />
     </div>
   )
 }
