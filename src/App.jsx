@@ -6,16 +6,29 @@ function App() {
   const [workouts, setWorkouts] = useState(initialWorkouts)
 
   const addNewWorkout = () => {
-    const newWorkout = generateWorkout()
+    const newWorkout = [...workouts]
+    newWorkout.push(generateWorkout())
+    setWorkouts(newWorkout)
     console.log("addNewWorkout:", newWorkout)
   }
 
   const deleteWorkout = (workout) => {
+    const workoutsWithoutRemoved =  workouts.filter(function(workouts) {
+      return workouts !== workout
+    })
+    setWorkouts(workoutsWithoutRemoved)
     console.log("deleteWorkout:", workout)
   }
 
-  const completeWorkout = (workout) => {
-    console.log("completeWorkout:", workout)
+  const completeWorkout = (target) => {
+    const updatedWorkouts = workouts.map(function(workout) {
+      if (workout === target) {
+        return {...workout, done: !target.done}
+      }
+      return workout
+    })
+    setWorkouts(updatedWorkouts)
+    console.log("completeWorkout:", target)
   }
 
   return (
